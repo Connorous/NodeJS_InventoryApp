@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1= title
+  if user_list.length
+    ul
+      each user in user_list
+        li
+          p #{user.username}
+          if user.admin
+            p is an administrator
+          else 
+            p is normal user
+
+  else
+    p There are no items.

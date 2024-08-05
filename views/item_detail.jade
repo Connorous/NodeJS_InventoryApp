@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1 Item: #{item.name}
+
+  p #[strong Category: ]
+    a(href=item.category.url) #{item.category.name}
+  p #[strong Description:] #{item.description}
+  p #[strong Price:] $#{item.price}
+  p #[strong Stock:] #{item.stocknum}
+
+  div(style='margin-left:20px;margin-top:20px')
+    h2(style='font-size: 1.5rem;') Copies #{item.stocknum}
+
+  hr
+  p
+    a(href='/item/deleteItem/'+item._id) Delete Item
+  p
+    a(href='/item/updateItem/'+item._id) Update Item

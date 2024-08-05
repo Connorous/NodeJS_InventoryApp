@@ -1,0 +1,42 @@
+extends layout
+
+block content
+  h1= title
+
+
+
+
+  form(method='POST' multipart="urlencoded")
+    div.form-group
+      label(for='name') Name:
+      input#name.form-control(type='text', placeholder='Name of item (Samsung Galaxy)' name='name' required value=(undefined===item ? '' : item.name) )
+    div.form-group
+      label(for='description') Description:
+      input#description.form-control(type='text', placeholder='Name of item (A cool smart phone)' name='description' required value=(undefined===item ? '' : item.description) )
+    div.form-group
+      label(for='category') Category:
+      select#category.form-control(name='category' required)
+        option(value='') --Please select a category--
+        for category in categories
+          if item
+            if category._id.toString()===item.category._id.toString()
+              option(value=category._id selected) #{category.name}
+            else
+              option(value=category._id) #{category.name}
+          else
+              option(value=category._id) #{category.name}
+
+    div.form-group
+      label(for='price') Price:
+      input#price.form-control(type='number' placeholder='Price ($50)' name='price' required value=(undefined===item ? '' : item.price) )
+    div.form-group
+      label(for='stocknum') Amount in Stock:
+      input#stocknum.form-control(type='number', placeholder='amount (50)' name='stocknum' required value=(undefined===item ? '' : item.stocknum) )
+    
+
+    button.btn.btn-primary(type='submit') Submit
+
+  if errors
+    ul
+      for error in errors
+        li!= error.msg
